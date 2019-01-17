@@ -1,5 +1,5 @@
 # JS-Budgetify
-Responsive budget app to help you with finances. 
+Responsive budget app to help you with finances. You can add your income, expenses to receive budget and percentage of income made vs. spent.
 
 Written with HTML, CSS, JS.
 
