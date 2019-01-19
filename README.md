@@ -10,6 +10,6 @@ Download or clone repository and run:
 index.html
 ```
 
-### Features to be added
+### Future plans
 Import from Scotiabank and BMO financial statements.
 Support estimation for RRSP, TFSA.
