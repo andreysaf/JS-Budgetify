@@ -32,6 +32,7 @@ var budgetController = (function (){
         data.totals[type] = sum;
     };
 
+    //Creating data structure
     var data = {
         allItems: {
             exp: [],
@@ -46,6 +47,7 @@ var budgetController = (function (){
     };
 
     return {
+        //Add item to the budget
         addItem: function(type, desc, val) {
             var newItem, ID;
             ID = uniqueID();
@@ -61,6 +63,7 @@ var budgetController = (function (){
 
         },
 
+        //Calculate budget
         calculateBudget: function() {
             //calculate total income and expenses
             calculateTotal('inc');
@@ -77,6 +80,7 @@ var budgetController = (function (){
                
         },
 
+        //Delete item from the budget
         deleteItem: function(type, id) {
             var ids, index;
 
@@ -91,6 +95,7 @@ var budgetController = (function (){
             }
         },
 
+        //Return the budget and totals
         getBudget: function() {
             return {
                 budget: data.budget,
@@ -125,6 +130,7 @@ var UIController = (function () {
     }
 
     return {
+        //Return the input by the user
         getInput: function() {
             return {
                 type : document.getElementById(DOMStrings.inputType).checked ? 'exp' : 'inc',
@@ -133,6 +139,7 @@ var UIController = (function () {
             };
         },
 
+        //Add income or expense item to the UI
         addListItem: function(obj, type) {
             var html, newHtml, element;
 
@@ -160,12 +167,14 @@ var UIController = (function () {
 
         },
 
+        //Remove income or expense item to the UI
         deleteListItem: function(selectorId) {
             var element;
             element = document.getElementById(selectorId);
             element.parentNode.removeChild(element);
         },
 
+        //Clear user input
         clearFields: function() {
             var fields, fieldsArr;
             fields = document.querySelectorAll(DOMStrings.inputDescription + ', ' + 
@@ -180,6 +189,7 @@ var UIController = (function () {
 
         },
 
+        //Display budget to the user
         displayBudget: function(obj) {
             console.log(obj);
             document.querySelector(DOMStrings.budgetLabel).textContent = '$' + obj.budget;
@@ -194,6 +204,7 @@ var UIController = (function () {
 
         },
 
+        //Retrieve HTML class names
         getDOMStrings: function() {
             return DOMStrings;
         }
@@ -203,7 +214,7 @@ var UIController = (function () {
 
 //Global App Controller
 var controller = (function (budgetCtrl, UICtrl) {
-
+    //Create event listeners
     var setupEventListerners = function() {
         var DOM = UICtrl.getDOMStrings();
 
