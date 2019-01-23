@@ -150,9 +150,14 @@ var UIController = (function () {
         expenseLabel : '.budget_expenses-value',
         percentageLabel : '.budget_expenses-percentage',
         container : '.container',
-        expPercLabel : '.item_percentage'
-
+        expPercLabel : '.item_percentage',
+        dateLabel: '.budget_title-month'
     }
+
+    
+    var formatNumber = function(num) {
+        return num.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    };
 
     return {
         //Return the input by the user
@@ -185,7 +190,7 @@ var UIController = (function () {
             //Update the string with data
             newHtml = html.replace('%id%', obj.id);
             newHtml = newHtml.replace('%description%', obj.description);
-            newHtml = newHtml.replace('%value%', obj.value);
+            newHtml = newHtml.replace('%value%', formatNumber(obj.value));
 
             //Insert the string into DOM
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
@@ -216,9 +221,9 @@ var UIController = (function () {
 
         //Display budget to the user
         displayBudget: function(obj) {
-            document.querySelector(DOMStrings.budgetLabel).textContent = '$' + obj.budget;
-            document.querySelector(DOMStrings.incomeLabel).textContent = '$' + obj.totalIncome;
-            document.querySelector(DOMStrings.expenseLabel).textContent = '$' + obj.totalExpenses;
+            document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(obj.budget);
+            document.querySelector(DOMStrings.incomeLabel).textContent = formatNumber(obj.totalIncome);
+            document.querySelector(DOMStrings.expenseLabel).textContent = formatNumber(obj.totalExpenses);
             
             if(obj.percentage > 0) {
                 document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + '%';
@@ -245,6 +250,12 @@ var UIController = (function () {
                 }
             });
 
+        },
+
+        displayMonth: function() {
+            var date = new Date();
+            var options = { year: 'numeric', month: 'long' };
+            document.querySelector(DOMStrings.dateLabel).textContent = date.toLocaleString('en-US', options);
         },
 
         //Retrieve HTML class names
@@ -338,6 +349,7 @@ var controller = (function (budgetCtrl, UICtrl) {
         init: function() {
             console.log('Application has started.');
             setupEventListerners();
+            UICtrl.displayMonth();
         }
     }
 

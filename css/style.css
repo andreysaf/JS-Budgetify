@@ -189,26 +189,18 @@ body {
     width: 100%;
     display: flex;
     align-content: center;
-    margin: 60px auto;
+    padding: 2em 5em 2em 5em;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
 .income {
-    float: left;
-    margin-left: 50px;
+    margin-left: 2em;
     flex-grow: 1;
 }
 
 .expenses {
-    float: left;
-    margin-left: 50px;
-    flex-grow: 1;
-}
-
-.savings {
-    float: left;
-    margin-left: 50px;
+    margin-left: 2em;
     flex-grow: 1;
 }
 
