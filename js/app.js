@@ -64,9 +64,9 @@ var budgetController = (function (){
             ID = uniqueID();
 
             if (type === 'exp'){
-                newItem = new Expense(ID, desc, val);
+                newItem = new Expense(ID, desc, Math.abs(val));
             } else if (type === 'inc') {
-                newItem = new Income(ID, desc, val);
+                newItem = new Income(ID, desc, Math.abs(val));
             }
 
             data.allItems[type].push(newItem);
@@ -292,15 +292,21 @@ var controller = (function (budgetCtrl, UICtrl) {
     };
 
     var ctrlAddItem = function() {
-        var input, newItem;
+        var input, newItem, type;
         // 1. Get the field input data
         input = UICtrl.getInput();
 
-        if (input.description !== "" && !isNaN(input.value) && input.value > 0){
+        if (input.description !== "" && !isNaN(input.value)){
             // 2. Add the item to the budget controller
-            newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+            if (input.value > 0) {
+                type = 'inc';
+            } else if (input.value < 0) {
+                type = 'exp';
+            }
+
+            newItem = budgetCtrl.addItem(type, input.description, input.value);
             // 3. Add the item to the UI
-            UICtrl.addListItem(newItem, input.type);
+            UICtrl.addListItem(newItem, type);
             // 4. Clear fields
             UICtrl.clearFields();
             // 5. Calculate and update budget
