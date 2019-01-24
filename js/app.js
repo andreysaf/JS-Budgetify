@@ -163,7 +163,6 @@ var UIController = (function () {
         //Return the input by the user
         getInput: function() {
             return {
-                type : document.getElementById(DOMStrings.inputType).checked ? 'exp' : 'inc',
                 description : document.querySelector(DOMStrings.inputDescription).value,
                 value : parseFloat(document.querySelector(DOMStrings.inputValue).value)
             };
