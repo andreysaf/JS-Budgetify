@@ -257,6 +257,18 @@ var UIController = (function () {
             document.querySelector(DOMStrings.dateLabel).textContent = date.toLocaleString('en-US', options);
         },
 
+        addError: function(type) {
+            if (type === 'desc') {
+                document.querySelector(DOMStrings.inputDescription).classList.add("add_error");
+            } else if (type === 'val') {
+                document.querySelector(DOMStrings.inputValue).classList.add("add_error");
+            }
+        },
+
+        clearError: function(id) {
+            document.getElementById(id).classList.remove("add_error");
+        },
+
         //Retrieve HTML class names
         getDOMStrings: function() {
             return DOMStrings;
@@ -277,6 +289,9 @@ var controller = (function (budgetCtrl, UICtrl) {
                 ctrlAddItem();
             }
         });
+
+        document.querySelector(DOM.inputDescription).addEventListener('click', clearError);
+        document.querySelector(DOM.inputValue).addEventListener('click', clearError);
 
         document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
     };
@@ -312,8 +327,22 @@ var controller = (function (budgetCtrl, UICtrl) {
             updateBudget();
             // 6. Update the percentages
             updatePercentages();
+        } else if (input.description === "") {
+            UICtrl.addError('desc');
+        } else if (isNaN(input.value)) {
+            UICtrl.addError('val');
         }
 
+    };
+
+    var clearError = function(event) {
+        var itemId, itemClass;
+        itemId = event.target.id;
+        itemClass= event.target.className;
+
+        if (itemClass.includes('error')) {
+            UICtrl.clearError(itemId);
+        }
     };
 
     var ctrlDeleteItem = function(event) {
@@ -327,18 +356,19 @@ var controller = (function (budgetCtrl, UICtrl) {
             ID = splitID[1];
         }
 
-        //Delete item from the budget controller
-        budgetCtrl.deleteItem(type, ID);
+        if (type !== undefined){
+            //Delete item from the budget controller
+            budgetCtrl.deleteItem(type, ID);
 
-        //Delete the item from the UI
-        UICtrl.deleteListItem(itemID);
+            //Delete the item from the UI
+            UICtrl.deleteListItem(itemID);
 
-        //Update budget
-        updateBudget();
+            //Update budget
+            updateBudget();
 
-        //Update the percentages
-        updatePercentages();
-
+            //Update the percentages
+            updatePercentages();
+        }
     };
 
     var updatePercentages = function () {

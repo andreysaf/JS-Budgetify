@@ -155,6 +155,33 @@ body {
     transition: border 0.3s;
 }
 
+.add_error {
+    outline: none;
+    border: 1px solid #FF5049;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+
 .add_description { width: 400px;}
 .add_value { width: 100px;}
 
@@ -162,7 +189,7 @@ body {
     font-size: 35px;
     background: none;
     border: none;
-    color: #76b852;
+    color: #363795;
     cursor: pointer;
     display: inline-block;
     vertical-align: middle;
@@ -176,7 +203,7 @@ body {
 .add_description:focus,
 .add_value:focus {
     outline: none;
-    border: 1px solid #76b852;
+    border: 1px solid #363795;
 }
 
 .add_btn:focus { outline: none; }
