@@ -213,7 +213,7 @@ body {
     width: 100%;
     display: flex;
     align-content: center;
-    padding: 2em 5em 2em 5em;
+    padding: 3em 30em 3em 30em;
     flex-direction: row;
     flex-wrap: wrap;
 }
