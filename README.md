@@ -1,6 +1,8 @@
 # JS-Budgetify
 Responsive budget app to help you with finances. You can add your income, expenses to receive budget and percentage of income made vs. spent.
 
+<img src="https://i.imgur.com/HB6bCY8.png" title="source: imgur.com" />
+
 Written with HTML, CSS, JS.
 
 ### Installing
